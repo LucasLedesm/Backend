@@ -1,22 +1,16 @@
-const express = require('express');
-const app = express();
-const container = require('./controllers/index.js')
-const port = 8080;  // puerto   8080    
+const express = require('express')
+const bodyparser = require('body-parser')
+const api = require('./routes/api')
 
-const Server = app.listen(port, () => {
-    console.log(`Servidor corriendo en el puerto ${Server.address().port}`);  // imprime en consola el puerto en el que esta corriendo el servidor
+const app = express()
 
-});
-app.get("/productos", (req, res) => {
-    container.getAll().then(resp=>res.send(resp))
-  });
-  
-  app.get("/productoRandom", (req, res)=>{
-    container.getAll().then(resp=>res.send(
-      resp[Math.floor(Math.random()*resp.length)]
-    ))
-  })
-  
+app.use(express.urlencoded({ extended: true }))
+app.use(api)
+app.use(express.static('public'))
+app.use(bodyparser.json())
 
-
-Server.on("error", error => { console.log(error); });
+/* ------------------------------------------------ */
+/* Server listener */
+const PORT = 8080
+const server = app.listen(PORT)
+server.on('error', (error) => console.log(`Error en servidor ${error}`))
