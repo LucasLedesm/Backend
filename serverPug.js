@@ -12,7 +12,7 @@ app.use(bodyparser.json())
 // pug
 
 app.set('view engine', 'pug')
-app.set('index', './views')
+app.set('views', './views')
 
 
 /* ------------------------------------------------ */

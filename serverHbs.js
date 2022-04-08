@@ -15,11 +15,11 @@ app.engine(
   'hbs',
   engine({
     extname: '.hbs',
-    defaultLayout: 'main.hbs',
+    defaultLayout: 'index.hbs',
   })
 )
 app.set('view engine', 'hbs')
-app.set('index', './views')
+app.set('views', './views')
 
 
 /* ------------------------------------------------ */

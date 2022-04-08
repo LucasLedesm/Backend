@@ -11,7 +11,7 @@ app.use(bodyparser.json())
 
 // ejs
 app.set('view engine', 'ejs')
-app.set('index', './views')
+app.set('views', './views')
 
 
 /* ------------------------------------------------ */
