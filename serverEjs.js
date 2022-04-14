@@ -9,6 +9,9 @@ const io = require('socket.io')(server)
 let messages = [
 ];
 
+let producto = [
+];
+
 app.use(express.urlencoded({ extended: true }))
 app.use(api)
 app.use(express.static('public'))
@@ -18,16 +21,21 @@ app.use(bodyparser.json())
 app.set('view engine', 'ejs') // set the view engine to ejs
 app.set('views', './views') // set the views directory
 
-
 // socket.io
 io.on('connection', function(socket) {
     console.log('Un cliente se ha conectado');
     socket.emit('messages', messages); // Enviamos los mensajes al cliente
+    socket.emit("producto", producto); // Enviamos los productos al cliente
 
     socket.on('new-message', function(data) {
         messages.push(data); // Agregamos el mensaje recibido al array de mensajes
         io.sockets.emit('messages', messages); // Emitimos el array de mensajes a todos los clientes
-    });    
+    });
+    
+    socket.on('new-producto', function(data) {
+        producto.push(data); // Agregamos el producto recibido al array de productos
+        io.sockets.emit('producto', producto); // Emitimos el array de productos a todos los clientes
+    });
 });
 
 /* ------------------------------------------------ */
