@@ -40,9 +40,10 @@ function addProducto() {
   let producto = {
     nombre: document.getElementById('nombre').value,
     precio: document.getElementById('precio').value,
-    url: document.getElementById('url').value
+    url: document.getElementById('url').value,
   };
-  socket.emit("new-producto", producto);
+  console.log(producto);
+    socketProducto.emit("new-producto", producto);
   document.getElementById('nombre').value = ''
   document.getElementById('precio').value = ''
   document.getElementById('url').value = ''
